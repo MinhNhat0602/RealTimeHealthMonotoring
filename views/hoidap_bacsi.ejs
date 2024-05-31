@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hệ thống quản lý sức khỏe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 shadow-lg me-1" style="background-color: #fff !important;">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">				
+                
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    
+                    <li class="nav-item">
+                        <a href="/" class="nav-link align-middle px-0 link-dark fw-bold">
+                            <i class="fs-4 bi bi-list"></i> <span class="ms-1 d-none d-sm-inline">DANH SÁCH BỆNH NHÂN</span>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a href="/lichkham" class="nav-link align-middle px-0 link-dark fw-bold">
+                            <i class="fs-4 bi bi-calendar-event"></i> <span class="ms-1 d-none d-sm-inline">LỊCH KHÁM BỆNH</span>
+                        </a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a href="/lichuongthuoc" class="nav-link align-middle px-0 link-dark fw-bold">
+                            <i class="fs-4 bi bi-card-text"></i> <span class="ms-1 d-none d-sm-inline">LỊCH UỐNG THUỐC</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item ">
+                        <a href="/hoidap_bacsi" class="nav-link align-middle px-0 link-dark fw-bold">
+                            <i class="fs-4 bi bi-reply"></i> <span class="ms-1 d-none d-sm-inline">PHẢN HỒI</span>
+                        </a>
+                    </li>				          
+                    
+                              <hr>
+                              <li class="nav-item">
+                                <div class="fixed-bottom m-3 fw-bold link-dark">
+                                    <i class="bi bi-person-fill"></i>
+                                    <%=un%> |
+                                        <a style="text-decoration: none" class="text-danger fw-bold" href="/thoat">Đăng Xuất</a>
+                                </div>
+                            </li>
+                </ul>             
+                
+                
+            </div>
+        </div>
+        <div class="col card" style="background-color: #F2F3F4">
+			<div class="card-body">
+				<h2 class="card-title text-center">DANH SÁCH BỆNH NHÂN</h2>
+                <div class="card mt-3">
+                    
+                    <div class="card-body">
+                        <!-- <div class="col px-1 pt-4 ms-2 mb-3">
+                            <form action="" method="get" class="d-flex w-50 ms-2 ps-2" role="search">
+                                <input name="txttimkiem" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-warning" type="submit">Search</button>
+                            </form>
+                        </div>   -->
+                        <table class="table">
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã Bệnh Nhân</th>
+                                    <th scope="col">Tên Bệnh Nhân</th>
+                                    <th scope="col">Nội Dung</th>
+                                    <th scope="col">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider text-center">
+                                <% for (let [index,hoi] of listhoi.entries() ) { %>
+                                    <tr>
+                                        <td><%= index+1 %> </td>
+                                        <td><%= hoi.Id_BenhNhan %> </td>
+                                        <td><%= hoi.TenBenhNhan %> </td>
+                                        <td><%= hoi.NoiDung %> </td>
+                                        <td><a href="/phanhoi?id_hoi=<%= hoi.Id %>&noidung=<%= hoi.NoiDung %>" class="btn btn-success"><i class="bi bi-reply-all"></i></a></td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                        <!-- <ul class="pagination justify-content-center pt-2" style="margin:20px 0">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul> -->
+                    </div>
+                </div>
+                
+			</div>
+			
+		</div>
+    </div>
+</div>
+
+</body>
+</html>

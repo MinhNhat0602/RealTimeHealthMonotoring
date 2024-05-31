@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hệ thống quản lý sức khỏe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+        }
+
+        .form-control {
+            height: 50px;
+        }
+
+        /* form {
+            display: flex;
+            flex-direction: column;
+            margin: 100px auto;
+            padding: 40px 40px 60px;
+            max-width: 1000px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        } */
+
+        /* form h1 {
+            margin: 10px 0 5px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #474b50;
+        } */
+
+        button.btn.btn-success.mt-3.mb-2.me-4 {
+            height: 50px;
+            font-weight: 600;
+            color: floralwhite;
+        }
+
+        label {
+            margin: 25px 0 10px;
+            font-weight: 500;
+            color: #474b50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 shadow-lg me-1"
+                style="background-color: #fff !important;">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                        id="menu">
+
+                        <li class="nav-item">
+                            <a href="/" class="nav-link align-middle px-0 link-dark fw-bold">
+                                <i class="fs-4 bi bi-list"></i> <span class="ms-1 d-none d-sm-inline">DANH SÁCH BỆNH
+                                    NHÂN</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="/hoidap_bacsi" class="nav-link align-middle px-0 link-dark fw-bold">
+                                <i class="fs-4 bi bi-reply"></i> <span class="ms-1 d-none d-sm-inline">PHẢN HỒI</span>
+                            </a>
+                        </li>
+
+                        <hr>
+                        <li class="nav-item">
+                            <div class="fixed-bottom m-3 fw-bold link-dark">
+                                <i class="bi bi-person-fill"></i>
+                                <%=un%> |
+                                    <a style="text-decoration: none" class="text-danger fw-bold" href="/thoat">Đăng
+                                        Xuất</a>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+            <div class="col card" style="background-color: #F2F3F4">
+                <div class="card-body">
+                    <h2 class="card-title text-center">THÊM LỊCH UỐNG THUỐC</h2>
+                    <div class="container">
+                        <form action="/themlichuongthuoc" method="POST">
+                            <!-- <div class="container">
+                                <div id="medication-form">
+                                    <div class="medication-entry">
+                                        <div class="mb-3">
+                                            <label for="GioUong" class="form-label">Giờ Uống:</label>
+                                            <input type="time" class="form-control" id="GioUong" name="GioUong">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="TenThuoc">Thuốc</label>
+                                                <select id="TenThuoc" name="TenThuoc" data-placeholder="Select Medicine"
+                                                    multiple data-multi-select>
+                                                    <% listthuoc.forEach(function(lichuongthuoc) { %>
+                                                        <option name="TenThuoc" value="<%= lichuongthuoc.Id %>">
+                                                            <%= lichuongthuoc.TenThuoc %>
+                                                        </option>
+                                                        <% }); %>
+                                                </select>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="LieuLuong" class="form-label">Số Lượng:</label>
+                                                <input name="LieuLuong" type="number" placeholder="Số lượng"
+                                                    class="form-control" >
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="NhacNho" class="form-label">Nhắc Nhở:</label>
+                                            <input type="text" class="form-control" id="NhacNho" name="NhacNho">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label hidden for="MaBS" class="form-label">Mã BS:</label>
+                                            <input type="hidden" class="form-control" id="MaBS" value="<%=un%>" name="MaBacSi">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success mt-3 mb-2 me-4"><i
+                                        class="bi bi-plus-circle me-2"></i>Thêm
+                                    Mới</button>
+                            </div> -->
+
+                            <div id="thuoc-container">
+                                <div class="thuoc-item mb-3 row">
+                                    <div class="col-6">
+                                        <label for="Id_Thuoc">Thuốc:</label>
+                                        <select name="Id_Thuoc[]" class="form-control">
+                                            <% listthuoc.forEach(function(thuoc) { %>
+                                                <option value="<%= thuoc.Id %>">
+                                                    <%= thuoc.TenThuoc %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <label for="LieuLuong" class="mt-2">Liều lượng:</label>
+                                        <input type="number" name="LieuLuong[]" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary mb-3" onclick="addThuoc()">Thêm
+                                thuốc</button>
+                            <div class="form-group">
+                                <label for="GioUong">Giờ uống:</label>
+                                <input type="time" name="GioUong" id="GioUong" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="NhacNho">Nhắc nhở:</label>
+                                <input type="text" name="NhacNho" id="NhacNho" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label hidden for="MaBS" class="form-label">Mã BS:</label>
+                                <input type="hidden" class="form-control" id="MaBS" value="<%=un%>" name="MaBacSi">
+                            </div>
+                            <div class="mb-3">
+                                <label hidden for="MaBenhNhan" class="form-label">Mã Bệnh Nhân:</label>
+                                <input type="hidden" class="form-control" id="MaBenhNhan" name="MaBenhNhan">
+                            </div>
+                            <button type="submit" class="btn btn-success mb-2 me-4 mt-4" style="float: right;"><i
+                                    class="bi bi-plus-circle me-2"></i>Thêm Mới</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <script src="js/javascript.js"></script> -->
+    <!-- <script>
+        new MultiSelect('#dynamic', {
+            data: [
+                {
+                    value: 'opt1',
+                    text: 'Option 1'
+                },
+                {
+                    value: 'opt2',
+                    html: '<strong>Option 2 with HTML!</strong>'
+                },
+                {
+                    value: 'opt3',
+                    text: 'Option 3',
+                    selected: true
+                },
+                {
+                    value: 'opt4',
+                    text: 'Option 4'
+                },
+                {
+                    value: 'opt5',
+                    text: 'Option 5'
+                }
+            ],
+            placeholder: 'Select an option',
+            search: true,
+            selectAll: true,
+            listAll: false,
+            max: 2,
+            onChange: function (value, text, element) {
+                console.log('Change:', value, text, element);
+            },
+            onSelect: function (value, text, element) {
+                console.log('Selected:', value, text, element);
+            },
+            onUnselect: function (value, text, element) {
+                console.log('Unselected:', value, text, element);
+            }
+        });
+    </script> -->
+    <script>
+        function addThuoc() {
+            var container = document.getElementById('thuoc-container');
+            var newItem = document.createElement('div');
+            newItem.className = 'thuoc-item mb-3 row';
+            newItem.innerHTML = `
+            <div class="col-6">
+                                        <label for="Id_Thuoc">Thuốc:</label>
+                                        <select name="Id_Thuoc[]" class="form-control">
+                                            <% listthuoc.forEach(function(thuoc) { %>
+                                                <option value="<%= thuoc.Id %>">
+                                                    <%= thuoc.TenThuoc %>
+                                                </option>
+                                                <% }); %>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <label for="LieuLuong" class="mt-2">Liều lượng:</label>
+                                        <input type="number" name="LieuLuong[]" class="form-control" required>
+                                    </div>
+      `;
+            container.appendChild(newItem);
+        }
+
+        // Function to get query parameter by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get patient ID from URL and set it to the hidden input field
+        document.addEventListener('DOMContentLoaded', function () {
+            const patientId = getQueryParam('mabenhnhan');
+            if (patientId) {
+                document.getElementById('MaBenhNhan').value = patientId;
+            }
+        });
+    </script>
+</body>
+
+</html>
